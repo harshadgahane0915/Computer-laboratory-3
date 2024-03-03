@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:grey;
+            color: #;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        .completed {
+            color: green;
+        }
+        .pending {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Event Management Dashboard</h1>
+
+    <section>
+        <h2>Events</h2>
+        <ul>
+            {% for project in projects %}
+            <li>{{ project.name }}: {{ project.description }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Employees</h2>
+        <ul>
+            {% for employee in employees %}
+            <li>{{ employee.name }} ({{ employee.email }})</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Tasks</h2>
+        <ul>
+            {% for task in tasks %}
+            <li>
+                {{ task.title }}: {{ task.description }} | 
+                Due: {{ task.due_date }} | 
+                Assigned to: {% if task.assigned_to %}{{ task.assigned_to.name }}{% else %}N/A{% endif %} |
+                {% if task.completed %}<span class="completed">(Completed)</span>{% else %}<span class="pending">(Pending)</span>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+</html>
